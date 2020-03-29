@@ -1,16 +1,20 @@
 {
-  "name": "project-hwg",
-  "version": "1.0.0",
+  "name": "t",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
+  "bin": {
+    "t": "./bin/index.js",
+    "obsfx@t": "./bin/index.js"
+  },
   "scripts": {
-    "dev": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "test": "node ./bin/index.js",
+    "link": "npm link --force"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "parcel": "^1.12.4"
+  "author": "obsfx",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "kleur": "^3.0.3"
   }
 }
