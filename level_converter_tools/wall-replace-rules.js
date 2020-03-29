@@ -21,4 +21,5 @@ module.exports = {
     '1-0-0-0': 15,  // WALLEND2 ╼
     '0-0-1-0': 16,  // WALLEND3 ╽
     '0-0-0-1': 17,  // WALLEND4 ╿
+    '0-0-0-0': 18,  // WALLEND4 █
 }

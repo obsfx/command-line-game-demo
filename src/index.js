@@ -1,40 +1,42 @@
-// python3 img_to_levelarr.py ./level_imgs.json
-// level_converter_tools node ./tile_replacer.js ./levels/01.json  
+const readline = require('readline');
 
-const levels = require('./levels');
-const ascii_table = require('./ascii_table');
+const Player = require('./player');
+const constant = require('./constants');
+const state = require('./state');
+const screen = require('./screen');
 
-let currentlvl = levels.l02;
+state.currentLevel = 'l02';
+screen.reset();
 
-for (let i = 0; i < currentlvl.length; i++) {
-    let output = '';
-    for (let j = 0; j < currentlvl[0].length; j++) {
-        if (currentlvl[i][j] == 0) {
-            output += ' ';
-        } else {
-            output += ascii_table[currentlvl[i][j]];
-        }
+const p = new Player(3, 3, constant.PLAYER_CHAR);
+
+screen.nextFrame();
+
+readline.emitKeypressEvents(process.stdin);
+process.stdin.setRawMode(true);
+
+process.stdin.on('keypress', (str, key) => {
+    if (key.name == 'a') {
+        p.moveLeft();
     }
 
-    console.log(output);
-}
+    if (key.name == 'd') {
+        p.moveRight();
+    }
 
-// console.log('┌─────┐');
-// console.log('│     │')
-// console.log('│     │')
-// console.log('└─────┘')
+    if (key.name == 'w') {
+        p.moveUp();
+    }
 
-// console.log('╭─────╮');
-// console.log('│     │')
-// console.log('│     │')
-// console.log('╰─────╯')
+    if (key.name == 's') {
+        p.moveDown();
+    }
 
-// console.log('┏━━━━━┓');
-// console.log('┃     ┃')
-// console.log('┃     ┃')
-// console.log('┗━━━━━┛')
+    if (key.sequence === '\u0003') {
+        process.exit();
+    }
 
-// console.log('╔═════╗');
-// console.log('║     ║')
-// console.log('║     ║')
-// console.log('╚═════╝')
+    screen.nextFrame();
+
+    // console.log(key)
+});
