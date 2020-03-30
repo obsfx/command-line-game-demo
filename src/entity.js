@@ -50,7 +50,7 @@ class Entity {
 
     isLeftAvailable() {
         if (this.x > 0) {
-            if (state.blockLayer[this.y][this.x - 1] == ascii_table.empty) {
+            if (state.blockLayer[this.y][this.x - 1] == ascii_table.road) {
                 return true;
             }
         }
@@ -60,7 +60,7 @@ class Entity {
 
     isRightAvailable() {
         if (this.x < state.blockLayer[0].length - 1) {
-            if (state.blockLayer[this.y][this.x + 1] == ascii_table.empty) {
+            if (state.blockLayer[this.y][this.x + 1] == ascii_table.road) {
                 return true;
             }
         }
@@ -70,7 +70,7 @@ class Entity {
 
     isTopAvailable() {
         if (this.y > 0) {
-            if (state.blockLayer[this.y - 1][this.x] == ascii_table.empty) {
+            if (state.blockLayer[this.y - 1][this.x] == ascii_table.road) {
                 return true;
             }
         }
@@ -80,7 +80,7 @@ class Entity {
 
     isBottomAvailable() {
         if (this.y < state.blockLayer.length - 1) {
-            if (state.blockLayer[this.y + 1][this.x] == ascii_table.empty) {
+            if (state.blockLayer[this.y + 1][this.x] == ascii_table.road) {
                 return true;
             }
         }

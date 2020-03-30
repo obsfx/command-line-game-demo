@@ -1,4 +1,5 @@
 const constants = require('./constants');
+const kleur = require('kleur');
 
 // module.exports = {
 //     '0-1-0-1': 3,   // WALLCORNERTL ┌
@@ -55,6 +56,11 @@ const constants = require('./constants');
 
 module.exports = {
     empty: 0,
+    road: 1,
+
+    1: {
+        char: kleur.gray('.')
+    },
 
     3: {
         char: '┌'
@@ -110,7 +116,17 @@ module.exports = {
         char: '█'
     },
 
+    //DOOR
+
+    30: {
+        char: kleur.grey('━')
+    },
+
+    31: {
+        char: kleur.grey('┃')
+    },
+
     50: {
-        char: constants.PLAYER_CHAR
+        char: kleur.yellow(constants.PLAYER_CHAR)
     } //PLAYER_INDEX
 }

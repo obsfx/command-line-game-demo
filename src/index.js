@@ -5,7 +5,7 @@ const constant = require('./constants');
 const state = require('./state');
 const screen = require('./screen');
 
-state.currentLevel = 'l02';
+state.currentLevel = 'l01';
 screen.reset();
 
 const p = new Player(3, 3, constant.PLAYER_CHAR);
@@ -18,17 +18,11 @@ process.stdin.setRawMode(true);
 process.stdin.on('keypress', (str, key) => {
     if (key.name == 'a') {
         p.moveLeft();
-    }
-
-    if (key.name == 'd') {
+    } else if (key.name == 'd') {
         p.moveRight();
-    }
-
-    if (key.name == 'w') {
+    } else if (key.name == 'w') {
         p.moveUp();
-    }
-
-    if (key.name == 's') {
+    } else if (key.name == 's') {
         p.moveDown();
     }
 

@@ -1,7 +1,5 @@
 const readline = require('readline');
 
-const kleur = require('kleur');
-
 const ascii_table = require('./ascii-table');
 const levels = require('./levels');
 const state = require('./state');
@@ -26,11 +24,11 @@ const render = _ => {
 
     for (let i = 0; i < state.screen.length; i++) {
         for (let j = 0; j < state.screen[0].length; j++) {
-            if (state.screen[i][j] == ascii_table.empty) {
-                output += kleur.grey('.');
-            } else {
-                output += ascii_table[state.screen[i][j]].char;
-            }
+                if (state.screen[i][j] == ascii_table.empty) { 
+                    output += ' ';
+                } else {
+                    output += ascii_table[state.screen[i][j]].char;
+                }
         }
     
         output += "\n"
