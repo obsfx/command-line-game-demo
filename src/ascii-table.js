@@ -126,6 +126,10 @@ module.exports = {
         char: kleur.grey('┃')
     },
 
+    40: {
+        char: kleur.grey('*')
+    },
+
     50: {
         char: kleur.yellow(constants.PLAYER_CHAR)
     } //PLAYER_INDEX
