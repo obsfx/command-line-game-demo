@@ -17,6 +17,7 @@ const render = _ => {
                 if (state.screen[i][j] == ascii_table.empty) { 
                     output += ' ';
                 } else {
+                    // console.log(state.screen[i][j])
                     output += ascii_table[state.screen[i][j]].char;
                 }
         }

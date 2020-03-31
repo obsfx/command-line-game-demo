@@ -63,6 +63,7 @@ module.exports = {
         char: kleur.gray('.')
     },
 
+    // -------------------------------
     3: {
         char: '┌'
     },
@@ -136,5 +137,69 @@ module.exports = {
 
     50: {
         char: kleur.yellow(constants.PLAYER_CHAR)
-    } //PLAYER_INDEX
+    }, //PLAYER_INDEX
+
+
+    // -------------------------------
+    663: {
+        char: kleur.magenta('╔')
+    },
+    664: {
+        char: kleur.magenta('╗')
+    },
+    665: {
+        char: kleur.magenta('╚')
+    },
+    666: {
+        char: kleur.magenta('╝')
+    },
+
+    667: {
+        char: kleur.magenta('╠')
+    },
+    668: {
+        char: kleur.magenta('╣')
+    },
+
+    669: {
+        char: kleur.magenta('╦')
+    },
+    670: {
+        char: kleur.magenta('╩')
+    },
+
+    671: {
+        char: kleur.magenta('╬')
+    },
+
+    672: {
+        char: kleur.magenta('║')
+    },
+    673: {
+        char: kleur.magenta('═')
+    },
+
+    674: {
+        char: kleur.magenta('┈')
+    },
+    675: {
+        char: kleur.magenta('┈')
+    },
+    676: {
+        char: kleur.magenta('┊')
+    },
+    677: {
+        char: kleur.magenta('┊')
+    },
+    678: {
+        char: kleur.magenta('█')
+    },
+
+    700: {
+        char: kleur.bgBlue().white('0')
+    },
+
+    800: {
+        char: kleur.bgMagenta().white('≈')
+    }
 }

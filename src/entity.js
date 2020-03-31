@@ -9,8 +9,15 @@ class Entity {
         this.index = index;
         this.prev = null;
 
-        this.allowedFloors = [ ascii_table.road, ascii_table.roomfloor ]
+        this.allowedFloors = [ 
+            ascii_table.road, 
+            ascii_table.roomfloor,   
+        ]
 
+        this.allowedFloorsMin = [ 663 ]
+        this.allowedFloorsMax = [ 678 ]
+
+        this.pushGapsToAvailableFloors();
         this.setxy(this.x, this.y);
     }
 
@@ -88,6 +95,14 @@ class Entity {
         }
 
         return false;
+    }
+
+    pushGapsToAvailableFloors() {
+        for (let i = 0; i < this.allowedFloorsMin.length; i++) {
+            for (let j = this.allowedFloorsMin[i]; j <= this.allowedFloorsMax[i]; j++) {
+                this.allowedFloors.push(j);
+            }
+        }
     }
 }
 

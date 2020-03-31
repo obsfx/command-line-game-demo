@@ -2,7 +2,7 @@
 
 module.exports = {
     2: {
-        checkIndex: 2,
+        checkIndex: [ 2 ],
 
         '0-1-0-1': 3,   // WALLCORNERTL ┌
         '1-0-0-1': 4,   // WALLCORNERTR ┐
@@ -28,9 +28,35 @@ module.exports = {
     },
 
     30: {
-        checkIndex: 2,
+        checkIndex: [ 2 ],
 
         '1-1-0-0': 30,  // DOOR ┃
         '0-0-1-1': 31,  // DOOR ━
+    },
+
+    600: {
+        checkIndex: [ 600, 700 ],
+
+        '0-1-0-1': 663,   // LINE-TL ┌
+        '1-0-0-1': 664,   // LINE-TR ┐
+        '0-1-1-0': 665,   // LINE-BL └
+        '1-0-1-0': 666,   // LINE-BR ┘
+
+        '0-1-1-1': 667,   // LINE-TRB ├
+        '1-0-1-1': 668,   // LINE-TLB ┤
+
+        '1-1-0-1': 669,   // LINE-BLR ┬
+        '1-1-1-0': 670,   // LINE-TLR ┴
+
+        '1-1-1-1': 671,  // LINE-TLRB ┼	
+
+        '0-0-1-1': 672,  // LINE ─
+        '1-1-0-0': 673,  // LINE-2 │
+
+        '0-1-0-0': 674,  // LINE-END ╾
+        '1-0-0-0': 675,  // LINE-END2 ╼
+        '0-0-1-0': 676,  // LINE-END3 ╽
+        '0-0-0-1': 677,  // LINE-END4 ╿
+        '0-0-0-0': 678,  // LINE-END4 █
     }
 }

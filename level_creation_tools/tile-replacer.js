@@ -21,25 +21,25 @@ const replace = datarr => {
                 let checkIndex = rules.checkIndex;
     
                 if (j > 0) {
-                    if (datarr[i][j - 1] == checkIndex) {
+                    if (checkIndex.indexOf(datarr[i][j - 1]) > -1) {
                         left = 1
                     }
                 }
         
                 if (j < datarr[0].length - 1) {
-                    if (datarr[i][j + 1] == checkIndex) {
+                    if (checkIndex.indexOf(datarr[i][j + 1]) > -1) {
                         right = 1
                     }
                 }
         
                 if (i > 0) {
-                    if (datarr[i - 1][j] == checkIndex) {
+                    if (checkIndex.indexOf(datarr[i - 1][j]) > -1) {
                         top = 1
                     }
                 }
                 
                 if (i < datarr.length - 1) {
-                    if (datarr[i + 1][j] == checkIndex) {
+                    if (checkIndex.indexOf(datarr[i + 1][j]) > -1) {
                         bottom = 1
                     }
                 }

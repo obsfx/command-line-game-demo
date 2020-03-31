@@ -1,10 +1,14 @@
 {
-    "_comment": "0-empty 1-floors 2-walls 30-doors 40-room_entrance",
+    "_comment": "0-empty 1-floors 2-walls 6-lines 7-switch 8-gate 30-doors 40-room_entrance",
 
     "color_table": {
         "143-126-115": "0",
         "0-0-0": "1", 
         "255-241-232": "2",
+
+        "255-236-39": "600",
+        "0-228-54": "700",
+        "41-173-255": "800",
 
         "255-0-77": "30",
         "131-118-156": "40"
