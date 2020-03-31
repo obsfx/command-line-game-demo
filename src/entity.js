@@ -9,6 +9,8 @@ class Entity {
         this.index = index;
         this.prev = null;
 
+        this.allowedFloors = [ ascii_table.road, ascii_table.roomfloor ]
+
         this.setxy(this.x, this.y);
     }
 
@@ -50,7 +52,7 @@ class Entity {
 
     isLeftAvailable() {
         if (this.x > 0) {
-            if (state.blockLayer[this.y][this.x - 1] == ascii_table.road) {
+            if (this.allowedFloors.indexOf(state.blockLayer[this.y][this.x - 1]) > -1) {
                 return true;
             }
         }
@@ -60,7 +62,7 @@ class Entity {
 
     isRightAvailable() {
         if (this.x < state.blockLayer[0].length - 1) {
-            if (state.blockLayer[this.y][this.x + 1] == ascii_table.road) {
+            if (this.allowedFloors.indexOf(state.blockLayer[this.y][this.x + 1]) > -1) {
                 return true;
             }
         }
@@ -70,7 +72,7 @@ class Entity {
 
     isTopAvailable() {
         if (this.y > 0) {
-            if (state.blockLayer[this.y - 1][this.x] == ascii_table.road) {
+            if (this.allowedFloors.indexOf(state.blockLayer[this.y - 1][this.x]) > -1) {
                 return true;
             }
         }
@@ -80,7 +82,7 @@ class Entity {
 
     isBottomAvailable() {
         if (this.y < state.blockLayer.length - 1) {
-            if (state.blockLayer[this.y + 1][this.x] == ascii_table.road) {
+            if (this.allowedFloors.indexOf(state.blockLayer[this.y + 1][this.x]) > -1) {
                 return true;
             }
         }

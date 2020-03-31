@@ -1,14 +1,16 @@
 const readline = require('readline');
 
 const Player = require('./player');
+
 const constant = require('./constants');
 const state = require('./state');
 const screen = require('./screen');
+const map = require('./map');
 
-state.currentLevel = 'l01';
-screen.reset();
+map.setLevel('l01');
+map.reset();
 
-const p = new Player(3, 3, constant.PLAYER_CHAR);
+const p = new Player(5, 5, constant.PLAYER_CHAR);
 
 screen.nextFrame();
 

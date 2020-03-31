@@ -1,4 +1,6 @@
 {
+    "_comment": "0-empty 1-floors 2-walls 30-doors 40-room_entrance",
+
     "color_table": {
         "143-126-115": "0",
         "0-0-0": "1", 
@@ -12,11 +14,6 @@
         {
             "n": "01",
             "f": "./level_imgs/01.png"
-        },
-
-        {
-            "n": "02",
-            "f": "./level_imgs/02.png"
         }
     ]
 }

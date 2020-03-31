@@ -57,6 +57,7 @@ const kleur = require('kleur');
 module.exports = {
     empty: 0,
     road: 1,
+    roomfloor: 41,
 
     1: {
         char: kleur.gray('.')
@@ -116,19 +117,22 @@ module.exports = {
         char: '█'
     },
 
-    //DOOR
 
     30: {
         char: kleur.grey('━')
-    },
+    }, //DOOR
 
     31: {
         char: kleur.grey('┃')
+    }, //DOOR
+
+    41: {
+        char: ' '
     },
 
-    40: {
+    42: {
         char: kleur.grey('*')
-    },
+    }, //old -> DOOR_ENTRANCE new -> ROOM_FLOOR
 
     50: {
         char: kleur.yellow(constants.PLAYER_CHAR)

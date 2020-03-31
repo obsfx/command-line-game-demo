@@ -1,22 +1,12 @@
 const readline = require('readline');
 
 const ascii_table = require('./ascii-table');
-const levels = require('./levels');
 const state = require('./state');
-const utils = require('./utils');
+const map = require('./map');
 
 const clear = _ => {
     readline.cursorTo(process.stdout, 0, 0);
     readline.clearScreenDown(process.stdout);
-}
-
-const reset = _ => {
-    state.blockLayer = levels[state.currentLevel];
-    state.objectLayer = utils.getEmpty2D(state.blockLayer.length, state.blockLayer[0].length, 0);
-}
-
-const prepare = _ => {
-    state.screen = utils.mergeLayers(state.blockLayer, state.objectLayer);
 }
 
 const render = _ => {
@@ -39,14 +29,12 @@ const render = _ => {
 
 const nextFrame = _ => {
     clear();
-    prepare();
+    map.prepare();
     render()
 }
 
 module.exports = {
     clear,
-    reset,
-    prepare,
     render,
     nextFrame
 }

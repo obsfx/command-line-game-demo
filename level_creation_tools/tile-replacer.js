@@ -1,8 +1,7 @@
-const tile_rules = require('./wall-replacement-rules');
+const tile_rules = require('./tile-replacement-rules');
 
 const replace = datarr => {
     const keys = Object.keys(tile_rules);
-    const WALL = 2;
 
     let replaced = [];
 
