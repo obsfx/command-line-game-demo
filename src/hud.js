@@ -1,8 +1,10 @@
 const kleur = require('kleur');
 
 const status = {
-    SWITCHON: true,
-    DOHAVEGATEBYTE: false
+    SWITCHON: false,
+    DOHAVEGATEBYTE: false,
+    MIN_TEXT_HEIGHT: 3,
+    TEXT_WIDTH: 33
 }
 
 const values = {
@@ -22,6 +24,10 @@ const control = {
 
     setBits: value => {
         values.bits = value;
+    },
+
+    setText: text => {
+        values.info = text;
     }
 }
 
@@ -62,6 +68,28 @@ const levelVal = _ => {
     return kleur.white(values.level < 16 ? '0' : '' + values.level.toString(16).toUpperCase());
 }
 
+const text = _ => {    
+    let output = '';
+
+    if (values.info.length == 0) {
+        values.info = ' ';
+    }
+
+    for (let i = 0; i < values.info.length; i += status.TEXT_WIDTH) {
+        let line = values.info.slice(i, i + status.TEXT_WIDTH);
+        let suffix = '';
+
+        for (let j = 0; j < status.TEXT_WIDTH - line.length; j++) {
+            suffix += ' ';
+        }
+
+
+        output += `│ ${kleur.white(line) + suffix} │ ${(i < values.info.length - status.TEXT_WIDTH) ? '\n' : ''}`;
+    }
+
+    return output;
+}
+
 const render = _ => {
     let hud = `
 ┌${kleur.magenta('gate byte')}───────────────┬${switchTitle()}─┐
@@ -69,11 +97,17 @@ const render = _ => {
 ├${kleur.green('bits')}────────────────────┼level─────┤
 │ 0x${bitsVal()} ${bitsBars()} │ 0x${levelVal()}     │
 ├────────────────────────┴──────────┤
-│                                   │
-│                                   │
-│                                   │
+${text()}                                  
 └───────────────────────────────────┘
 `
+
+    if (status.MIN_TEXT_HEIGHT > Math.floor(values.info.length / status.TEXT_WIDTH)) {
+        let pseudoLineCounter = status.MIN_TEXT_HEIGHT - Math.floor(values.info.length / status.TEXT_WIDTH);
+
+        for (let i = 0; i < pseudoLineCounter; i++) {
+            hud += '\n';
+        }
+    }
 
     process.stdout.write(kleur.grey(hud));
 }
