@@ -57,29 +57,41 @@ class Entity {
         } 
     }
 
-    isLeftAvailable() {
+    getLeft(fromObjectLayer = false) {
         if (this.x > 0) {
-            if (this.allowedFloors.indexOf(state.blockLayer[this.y][this.x - 1]) > -1) {
-                return true;
-            }
+            return fromObjectLayer ? state.objectLayer[this.y][this.x - 1] : state.blockLayer[this.y][this.x - 1];
         }
 
         return false;
     }
 
-    isRightAvailable() {
+    getRight(fromObjectLayer = false) {
         if (this.x < state.blockLayer[0].length - 1) {
-            if (this.allowedFloors.indexOf(state.blockLayer[this.y][this.x + 1]) > -1) {
-                return true;
-            }
+            return fromObjectLayer ? state.objectLayer[this.y][this.x + 1] : state.blockLayer[this.y][this.x + 1];
         }
 
         return false;
     }
 
-    isTopAvailable() {
+    getTop(fromObjectLayer = false) {
         if (this.y > 0) {
-            if (this.allowedFloors.indexOf(state.blockLayer[this.y - 1][this.x]) > -1) {
+            return fromObjectLayer ? state.objectLayer[this.y - 1][this.x] : state.blockLayer[this.y - 1][this.x]
+        }
+
+        return false;
+    }
+
+    getBottom(fromObjectLayer = false) {
+        if (this.y < state.blockLayer.length - 1) {
+            return fromObjectLayer ? state.objectLayer[this.y + 1][this.x] : state.blockLayer[this.y + 1][this.x]
+        }
+
+        return false;
+    }
+
+    isLeftAvailable(fromObjectLayer = false) {
+        if (this.x > 0) {
+            if (this.allowedFloors.indexOf(this.getLeft(fromObjectLayer)) > -1) {
                 return true;
             }
         }
@@ -87,9 +99,29 @@ class Entity {
         return false;
     }
 
-    isBottomAvailable() {
+    isRightAvailable(fromObjectLayer = false) {
+        if (this.x < state.blockLayer[0].length - 1) {
+            if (this.allowedFloors.indexOf(this.getRight(fromObjectLayer)) > -1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    isTopAvailable(fromObjectLayer = false) {
+        if (this.y > 0) {
+            if (this.allowedFloors.indexOf(this.getTop(fromObjectLayer)) > -1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    isBottomAvailable(fromObjectLayer = false) {
         if (this.y < state.blockLayer.length - 1) {
-            if (this.allowedFloors.indexOf(state.blockLayer[this.y + 1][this.x]) > -1) {
+            if (this.allowedFloors.indexOf(this.getBottom(fromObjectLayer)) > -1) {
                 return true;
             }
         }

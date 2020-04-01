@@ -84,4 +84,7 @@ const walk = (pos, arr) => {
     return room_tiles;
 }
 
-module.exports = detect;
+module.exports =  {
+    detect,
+    find
+};

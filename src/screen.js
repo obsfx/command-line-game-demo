@@ -2,6 +2,7 @@ const readline = require('readline');
 
 const ascii_table = require('./ascii-table');
 const state = require('./state');
+const hud = require('./hud');
 const map = require('./map');
 
 const clear = _ => {
@@ -31,7 +32,8 @@ const render = _ => {
 const nextFrame = _ => {
     clear();
     map.prepare();
-    render()
+    hud.render();
+    render();
 }
 
 module.exports = {

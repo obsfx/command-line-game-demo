@@ -1,5 +1,5 @@
-const constants = require('./constants');
 const kleur = require('kleur');
+const constants = require('./constants');
 
 // module.exports = {
 //     '0-1-0-1': 3,   // WALLCORNERTL ┌

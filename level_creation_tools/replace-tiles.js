@@ -1,7 +1,8 @@
 const fs = require('fs');
 
 const replace = require('./tile-replacer');
-const detect_rooms = require('./room-detector');
+const { detect } = require('./room-detector');
+const getSwitches = require('./switch-detector');
 
 let file = process.argv[2];
 
@@ -14,11 +15,13 @@ for (let k = 0; k < list.length; k++) {
     let datarr = list[k].arr;
 
     let replaced = replace(datarr);
-    let [ arr, detected ] = detect_rooms(replaced);
+    let [ arr, detected ] = detect(replaced);
+    let switches = getSwitches(arr);
 
     let output = `const l${name} = { 
         arr: ${JSON.stringify(arr)}, 
-        rooms: ${JSON.stringify(detected)} 
+        rooms: ${JSON.stringify(detected)},
+        switches: ${JSON.stringify(switches)}
     }
     
 module.exports = l${name};
