@@ -14,7 +14,7 @@ const getSwitches = arr => {
                 switch_data.push({
                     x: j,
                     y: i,
-                    char: '0',
+                    id: switch_data.length + 1,
                     value: 0
                 });
             }

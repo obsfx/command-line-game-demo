@@ -20,8 +20,16 @@ process.stdin.setRawMode(true);
 process.stdin.on('keypress', (str, key) => {
     if (key.name == 'a') {
         state.player.move('left');
+
+        if (state.player.switchMode) {
+            state.player.decreaseSwitch();
+        }
     } else if (key.name == 'd') {
         state.player.move('right');
+
+        if (state.player.switchMode) {
+            state.player.increaseSwitch();
+        }
     } else if (key.name == 'w') {
         state.player.move('up');
     } else if (key.name == 's') {

@@ -138,7 +138,7 @@ class Entity {
     }
 
     getAround() {
-        return [
+        let indexes = [
             this.getLeft(),
             this.getRight(),
             this.getTop(),
@@ -147,7 +147,20 @@ class Entity {
             this.getTopRight(),
             this.getBottomLeft(),
             this.getBottomRight()
-        ]
+        ];
+
+        let pos = [
+            { x: this.x - 1, y: this.y },
+            { x: this.x + 1, y: this.y },
+            { x: this.x, y: this.y - 1 },
+            { x: this.x, y: this.y + 1 },
+            { x: this.x - 1, y: this.y - 1},
+            { x: this.x + 1, y: this.y - 1},
+            { x: this.x - 1, y: this.y + 1},
+            { x: this.x + 1, y: this.y + 1}
+        ];
+
+        return [ indexes, pos ];
     }
 
     isLeftAvailable(fromObjectLayer = false) {

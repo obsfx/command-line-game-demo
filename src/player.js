@@ -2,6 +2,8 @@ const ascii_table = require('./ascii-table');
 
 const hud = require('./hud');
 const constants = require('./constants');
+const switches = require('./switch');
+
 const Entity = require('./entity');
 
 class Player extends Entity {
@@ -10,10 +12,12 @@ class Player extends Entity {
 
         this.switchMode = false;
         this.isThereSwitch = false;
+        this.posOfSwitch = { x: 0, y: 0 };
 
         this.texts = {
             SWITCHTOGGLE: 'press <e> to adjust the switch',
-            SWITCHCLOSE: 'press <e> to close the switch'
+            SWITCHCLOSE: 'press <e> to close the switch   ',
+            SWITCHINFO: 'use <a> or <d> to adjust the     value of switch'
         }
     }
 
@@ -35,13 +39,20 @@ class Player extends Entity {
 
     lookForSwitches() {
         if (!this.switchMode) {
-            let around = this.getAround();
+            let [ indexes, pos ] = this.getAround();
 
-            if (around.indexOf(ascii_table.switch) > -1) {
+            let indexOfSwitch = indexes.indexOf(ascii_table.switch);
+
+            if (indexOfSwitch> -1) {
                 this.isThereSwitch = true;
+                
+                this.posOfSwitch.x = pos[indexOfSwitch].x;
+                this.posOfSwitch.y = pos[indexOfSwitch].y;
+
                 hud.control.pushText(this.texts.SWITCHTOGGLE);
             } else {
                 this.isThereSwitch = true;
+
                 hud.control.delText(this.texts.SWITCHTOGGLE);
             }
         }
@@ -51,14 +62,30 @@ class Player extends Entity {
         this.switchMode = !this.switchMode;
 
         if (this.switchMode) {
-            hud.control.setSwitch(true, 12, 1);
-            hud.control.delText(this.texts.SWITCHTOGGLE);
-            hud.control.pushText(this.texts.SWITCHCLOSE);
+
+            let data = switches.find(this.posOfSwitch);
+
+            if (data) {
+                hud.control.setSwitch(true, data.value, data.id);
+                hud.control.delText(this.texts.SWITCHTOGGLE);
+                hud.control.pushText(this.texts.SWITCHCLOSE);
+                hud.control.pushText(this.texts.SWITCHINFO);
+            }
+            
         } else {
-            hud.control.setSwitch(false, 12, 1);
+            hud.control.setSwitch(false, 0, 0);
             hud.control.delText(this.texts.SWITCHCLOSE);
+            hud.control.delText(this.texts.SWITCHINFO);
             hud.control.pushText(this.texts.SWITCHTOGGLE);
         }
+    }
+
+    increaseSwitch() {
+        switches.increase(this.posOfSwitch);
+    }
+
+    decreaseSwitch() {
+        switches.decrease(this.posOfSwitch);
     }
 }
 
