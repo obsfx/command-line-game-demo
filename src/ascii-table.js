@@ -58,6 +58,7 @@ module.exports = {
     empty: 0,
     road: 1,
     roomfloor: 41,
+    switch: 700,
 
     1: {
         char: kleur.gray('.')
@@ -196,7 +197,7 @@ module.exports = {
     },
 
     700: {
-        char: kleur.bgBlue().white('0')
+        char: '0'
     },
 
     800: {

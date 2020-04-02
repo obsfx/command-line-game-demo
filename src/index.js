@@ -10,7 +10,7 @@ const map = require('./map');
 map.setLevel('l01');
 map.reset();
 
-const p = new Player(5, 5, constant.PLAYER_CHAR);
+const p = new Player(5, 4, constant.PLAYER_CHAR);
 
 screen.nextFrame();
 
@@ -19,13 +19,13 @@ process.stdin.setRawMode(true);
 
 process.stdin.on('keypress', (str, key) => {
     if (key.name == 'a') {
-        p.moveLeft();
+        p.move('left');
     } else if (key.name == 'd') {
-        p.moveRight();
+        p.move('right');
     } else if (key.name == 'w') {
-        p.moveUp();
+        p.move('up');
     } else if (key.name == 's') {
-        p.moveDown();
+        p.move('down');
     }
 
     if (key.sequence === '\u0003') {

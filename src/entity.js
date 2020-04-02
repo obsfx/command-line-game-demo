@@ -33,28 +33,44 @@ class Entity {
         if (this.isLeftAvailable()) {
             state.objectLayer[this.y][this.x] = this.prev;
             this.setxy(this.x - 1, this.y);
-        } 
+
+            return true;
+        }
+
+        return false;
     }
 
     moveRight() {
         if (this.isRightAvailable()) {
             state.objectLayer[this.y][this.x] = this.prev;
             this.setxy(this.x + 1, this.y);
+
+            return true;
         }
+
+        return false;
     }
 
     moveUp() {
         if (this.isTopAvailable()) {
             state.objectLayer[this.y][this.x] = this.prev;
             this.setxy(this.x, this.y - 1);
-        } 
+
+            return true;
+        }
+
+        return false;
     }
 
     moveDown() {
         if (this.isBottomAvailable()) {
             state.objectLayer[this.y][this.x] = this.prev;
             this.setxy(this.x, this.y + 1);
-        } 
+
+            return true;
+        }
+
+        return false;
     }
 
     getLeft(fromObjectLayer = false) {
@@ -75,7 +91,7 @@ class Entity {
 
     getTop(fromObjectLayer = false) {
         if (this.y > 0) {
-            return fromObjectLayer ? state.objectLayer[this.y - 1][this.x] : state.blockLayer[this.y - 1][this.x]
+            return fromObjectLayer ? state.objectLayer[this.y - 1][this.x] : state.blockLayer[this.y - 1][this.x];
         }
 
         return false;
@@ -87,6 +103,51 @@ class Entity {
         }
 
         return false;
+    }
+
+    getTopLeft(fromObjectLayer = false) {
+        if (this.x > 0 && this.y > 0) {
+            return fromObjectLayer ? state.objectLayer[this.y - 1][this.x - 1] : state.blockLayer[this.y - 1][this.x - 1];
+        }
+
+        return false;
+    }
+
+    getTopRight(fromObjectLayer = false) {
+        if (this.x < state.blockLayer[0].length - 1 && this.y > 0) {
+            return fromObjectLayer ? state.objectLayer[this.y - 1][this.x + 1] : state.blockLayer[this.y - 1][this.x + 1];
+        }
+
+        return false;
+    }
+
+    getBottomLeft(fromObjectLayer = false) {
+        if (this.x > 0 && this.y < state.blockLayer.length - 1) {
+            return fromObjectLayer ? state.objectLayer[this.y + 1][this.x - 1] : state.blockLayer[this.y + 1][this.x - 1];
+        }
+
+        return false;
+    }
+
+    getBottomRight(fromObjectLayer = false) {
+        if (this.x < state.blockLayer[0].length - 1 && this.y < state.blockLayer.length - 1) {
+            return fromObjectLayer ? state.objectLayer[this.y + 1][this.x + 1] : state.blockLayer[this.y + 1][this.x + 1];
+        }
+
+        return false;
+    }
+
+    getAround() {
+        return [
+            this.getLeft(),
+            this.getRight(),
+            this.getTop(),
+            this.getBottom(),
+            this.getTopLeft(),
+            this.getTopRight(),
+            this.getBottomLeft(),
+            this.getBottomRight()
+        ]
     }
 
     isLeftAvailable(fromObjectLayer = false) {

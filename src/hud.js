@@ -3,21 +3,22 @@ const kleur = require('kleur');
 const status = {
     SWITCHON: false,
     DOHAVEGATEBYTE: false,
-    MIN_TEXT_HEIGHT: 3,
+    MIN_TEXT_HEIGHT: 2,
     TEXT_WIDTH: 33
 }
 
 const values = {
     switch: 0,
     switchCode: 1,
-    bits: 132,
+    bits: 255,
     level: 16,
+    textarr: [],
     info: ''
 }
 
 const control = {
-    setSwitch: (status, value, code) => {
-        status.SWITCHON = status;
+    setSwitch: (switchStatus, value, code) => {
+        status.SWITCHON = switchStatus;
         values.switch = value;
         values.switchCode = code;
     },
@@ -26,8 +27,20 @@ const control = {
         values.bits = value;
     },
 
-    setText: text => {
-        values.info = text;
+    pushText: text => {
+        let textIndex = values.textarr.indexOf(text);
+        
+        if (textIndex == -1) {
+            values.textarr.push(text);
+        }
+    },
+
+    delText: text => {
+        let textIndex = values.textarr.indexOf(text);
+
+        if (textIndex > -1) {
+            values.textarr.splice(textIndex, 1);
+        }
     }
 }
 
@@ -71,6 +84,8 @@ const levelVal = _ => {
 const text = _ => {    
     let output = '';
 
+    values.info = values.textarr.join(' ');
+
     if (values.info.length == 0) {
         values.info = ' ';
     }
@@ -83,7 +98,6 @@ const text = _ => {
             suffix += ' ';
         }
 
-
         output += `│ ${kleur.white(line) + suffix} │ ${(i < values.info.length - status.TEXT_WIDTH) ? '\n' : ''}`;
     }
 
@@ -91,15 +105,31 @@ const text = _ => {
 }
 
 const render = _ => {
-    let hud = `
-┌${kleur.magenta('gate byte')}───────────────┬${switchTitle()}─┐
-│ ${gateVal()}  │ ${switchVal()}  │
-├${kleur.green('bits')}────────────────────┼level─────┤
-│ 0x${bitsVal()} ${bitsBars()} │ 0x${levelVal()}     │
-├────────────────────────┴──────────┤
-${text()}                                  
-└───────────────────────────────────┘
-`
+    let hud = '';
+    
+    let lines = [
+        `┌${kleur.magenta('gate byte')}───────────────┬${switchTitle()}─┐`,
+        `│ ${gateVal()}  │ ${switchVal()}  │`,
+        `├${kleur.green('bits')}────────────────────┼level─────┤`,
+        `│ 0x${bitsVal()} ${bitsBars()} │ 0x${levelVal()}     │`,
+        `├────────────────────────┴──────────┤`,
+        `${text()}`,
+        `└───────────────────────────────────┘`
+    ];
+
+//     let hud = `
+// ┌${kleur.magenta('gate byte')}───────────────┬${switchTitle()}─┐
+// │ ${gateVal()}  │ ${switchVal()}  │
+// ├${kleur.green('bits')}────────────────────┼level─────┤
+// │ 0x${bitsVal()} ${bitsBars()} │ 0x${levelVal()}     │
+// ├────────────────────────┴──────────┤
+// ${text()}                                  
+// └───────────────────────────────────┘
+// `
+
+    for (let i = 0; i < lines.length; i++) {
+        hud += lines[i] + '\n';
+    }
 
     if (status.MIN_TEXT_HEIGHT > Math.floor(values.info.length / status.TEXT_WIDTH)) {
         let pseudoLineCounter = status.MIN_TEXT_HEIGHT - Math.floor(values.info.length / status.TEXT_WIDTH);
@@ -113,6 +143,7 @@ ${text()}
 }
 
 module.exports = {
+    status,
     control,
     render
 };
