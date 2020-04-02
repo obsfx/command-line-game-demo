@@ -4,7 +4,9 @@ const state = {
     objectLayer: null,
     stringLayer: null,
 
-    screen: null
+    screen: null,
+
+    player: null
 }
 
 module.exports = state;
